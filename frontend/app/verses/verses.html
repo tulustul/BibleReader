@@ -1,0 +1,14 @@
+Verses
+<div *ngIf="results">
+    {{ results.book }} {{ results.chapter }}
+    <ul>
+        <li *ngFor="#translation of results.translations">
+            {{ translation.name }}
+            <ul>
+                <li *ngFor="#verse of translation.verses">
+                    {{ verse.verse }} - {{ verse.text }}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
