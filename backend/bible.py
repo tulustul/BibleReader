@@ -18,7 +18,8 @@ VersesMetadata = collections.namedtuple('VersesMetadata', [
 
 def parse_verse_string(verse_string):
     book, verse = verse_string.split()
-    chapter, verse = verse.split(':')
+    if ':' in verse:
+        chapter, verse = verse.split(':')
     if '-' in verse:
         verse_from, verse_to = verse.split('-')
         verse = None
@@ -81,8 +82,8 @@ def verses(verse_string):
         models.Verse.translation.in_(translation_ids),
         models.Verse.book == verses_metadata.book,
         models.Verse.chapter == int(verses_metadata.chapter),
-        models.Verse.verse >= int(verses_metadata.verse_from),
-        models.Verse.verse <= int(verses_metadata.verse_to),
+        # models.Verse.verse >= int(verses_metadata.verse_from),
+        # models.Verse.verse <= int(verses_metadata.verse_to),
     ).order_by(models.Verse.verse)
 
     for verse in verses:
