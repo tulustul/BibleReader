@@ -1,7 +1,6 @@
 import collections
 
 import flask
-import sqlalchemy
 
 import db
 import models
@@ -37,7 +36,7 @@ def translations():
         {
             'id': language.id,
             'name': language.name,
-            'short_name': language.short_name,
+            'code': language.code,
             'translations': [
                 {
                     'id': translation.id,

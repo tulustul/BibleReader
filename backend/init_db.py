@@ -1,5 +1,4 @@
 import os
-import subprocess
 import sys
 
 import sqlalchemy
@@ -7,81 +6,68 @@ import sqlalchemy
 import db
 import models
 import sql
+from tools import loader
 
 ROOT = os.path.join('..', 'trans')
 
 
 def insert_data(force):
-    for lang in os.listdir(ROOT):
-        language = save_lang(lang)
-        for tran in os.listdir(os.path.join(ROOT, lang)):
-            tran_path = os.path.join(ROOT, lang, tran)
-            text_path = os.path.join(tran_path, 'text')
-            if os.path.exists(text_path) and not force:
-                load_text(text_path, language)
-            else:
-                parse_text(force, tran_path, text_path, language)
+    for lang in loader.list_languages():
+        print('Saving {}'.format(lang))
+        language = save_lang(loader.load_language(lang))
+        for tran in loader.list_translations(language=lang):
+            print('Saving {}'.format(tran))
+            save_tran(loader.load_translation(tran), language)
 
 
 def save_lang(lang):
-    lang_path = os.path.join(ROOT, lang, 'name')
-    if os.path.exists(lang_path):
-        with open(lang_path) as f:
-            lang_name = f.read()
-        language = models.Language(
-            short_name=lang,
-            name=lang_name,
+    language = models.Language(
+        code=lang['code'],
+        name=lang['name'],
+    )
+    sql.DBSession.add(language)
+    for book, book_translated in lang['books'].items():
+        language_book = models.LanguageBook(
+            language=language.id,
+            book=book,
+            book_translated=book_translated,
         )
-        sql.DBSession.add(language)
-        sql.DBSession.flush()
-        return language
-    else:
-        print('No "name" file for language "{}"'.format(lang))
+        sql.DBSession.add(language_book)
+    sql.DBSession.flush()
+    return language
 
 
 def save_tran(tran, language):
     translation = models.Translation(
-        name=tran.strip(),
+        name=tran['name'],
         language=language.id,
     )
     sql.DBSession.add(translation)
     sql.DBSession.flush()
-    return translation
 
+    for book, book_translated in tran['books'].items():
+        translation_book = models.TranslationBook(
+            translation=translation.id,
+            book=book,
+            book_name=book_translated,
+        )
+        sql.DBSession.add(translation_book)
 
-def parse_text(force, path, text_path, language):
-    parse_path = os.path.join(path, 'parse.py')
-    if os.path.exists(parse_path):
-        orig_working_dict = os.getcwd()
-        os.chdir(path)
-        result = subprocess.call(['python', 'parse.py'])
-        os.chdir(orig_working_dict)
-        if result == 0 and os.path.exists(text_path):
-            load_text(text_path, language)
-        else:
-            print('Failed to parse {}'.format(path))
-    else:
-        print('Missing parse function for {}'.format(path))
+    for book, chapters in tran['text'].items():
+        for chapter, verses in chapters.items():
+            for verse_number, verse in verses.items():
+                verse = models.Verse(
+                    book=book,
+                    chapter=chapter,
+                    verse=verse_number,
+                    text=verse,
+                    search=sqlalchemy.func.to_tsvector(verse),
+                    translation=translation.id,
+                )
+                sql.DBSession.add(verse)
 
-
-def load_text(path, language):
-    with open(path, encoding='utf-8') as f:
-        lines = f.readlines()
-        translation = save_tran(lines[0], language)
-
-        for line in lines[1:]:
-            line = line.strip()
-            book, chapter, verse, line = line.split(maxsplit=3)
-            verse = models.Verse(
-                book=book,
-                chapter=chapter,
-                verse=verse,
-                text=line,
-                search=sqlalchemy.func.to_tsvector(line),
-                translation=translation.id,
-            )
-            sql.DBSession.add(verse)
     sql.DBSession.flush()
+    return translation
 
 
 if __name__ == '__main__':

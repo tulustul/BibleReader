@@ -1,8 +1,9 @@
 import collections
+import json
 import os
 import sys
 
-ROOT = 'trans'
+ROOT = '../trans'
 
 
 class BibleFormatError(Exception):
@@ -21,8 +22,22 @@ class BibleFormatError(Exception):
         )
 
 
-def list_translations():
-    for language in os.listdir(ROOT):
+def list_languages():
+    return os.listdir(ROOT)
+
+
+def load_language(language_code):
+    path = os.path.join(ROOT, language_code, 'meta')
+    with open(path, encoding='utf8') as f:
+        return json.loads(f.read())
+
+
+def list_translations(language=None):
+    languages = list_languages()
+    if language and language in languages:
+        languages = [language]
+
+    for language in languages:
         for translation in os.listdir(os.path.join(ROOT, language)):
             if translation.endswith('.bible'):
                 yield '{}/{}'.format(language, translation)
@@ -30,12 +45,13 @@ def list_translations():
 
 def load_translation(translation_path, continue_on_error=False):
     language = translation_path.split('/')[0]
-    with open(os.path.join(ROOT, translation_path), encoding='utf8') as f:
+    path = os.path.join(ROOT, translation_path)
+    with open(path, encoding='utf8') as f:
         lines = f.readlines()
         translation = {
             'path': translation_path,
             'language': language,
-            'title': lines[0],
+            'name': lines[0],
             'books': {},
             'text': collections.defaultdict(dict)
         }
@@ -90,4 +106,9 @@ def handle_text(translation, line):
     if chapter not in book_dict:
         book_dict[chapter] = {}
 
-    book_dict[int(chapter)][int(verse)] = text.strip()
+    text = text.strip()
+
+    if text == '!EMPTY':
+        text = ''
+
+    book_dict[int(chapter)][int(verse)] = text
