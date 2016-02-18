@@ -1,0 +1,22 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  Mateusz Tomczyk -- Project Lead -- no homepage
+
+# THANKS
+
+  Thanks for all the fish
+
+# TECHNOLOGY COLOPHON
+
+  HTML5, CSS3
+  Angular 2
+  TypeScript
+  ES2015
+  JSPM
+  SystemJS
+  NodeJS
+  NPM
+  Gulp

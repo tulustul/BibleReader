@@ -1,15 +1,41 @@
 {
+  "version": "1.7.3",
   "compilerOptions": {
-    "target": "ES5",
-    "module": "system",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
+	"target": "es5",
+	"module": "commonjs",
+	"declaration": false,
+	"noImplicitAny": true,
+	"suppressImplicitAnyIndexErrors": true,
+	"removeComments": false,
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"noEmitOnError": false,
+	"preserveConstEnums": true,
+	"inlineSources": false,
+	"sourceMap": false,
+	"outDir": "./.tmp",
+	"rootDir": "./app",
+	"moduleResolution": "node",
+	"listFiles": false
+  },
+  "formatCodeOptions": {
+	"indentSize": 2,
+	"tabSize": 4,
+	"newLineCharacter": "\r\n",
+	"convertTabsToSpaces": false,
+	"insertSpaceAfterCommaDelimiter": true,
+	"insertSpaceAfterSemicolonInForStatements": true,
+	"insertSpaceBeforeAndAfterBinaryOperators": true,
+	"insertSpaceAfterKeywordsInControlFlowStatements": true,
+	"insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+	"placeOpenBraceOnNewLineForFunctions": false,
+	"placeOpenBraceOnNewLineForControlBlocks": false
   },
   "exclude": [
-    "node_modules"
+	"node_modules",
+	"jspm_packages",
+	"typings/browser",
+	"typings/browser.d.ts"
   ]
 }

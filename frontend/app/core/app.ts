@@ -1,19 +1,31 @@
-import {Component} from "angular2/core";
-import {Http, HTTP_PROVIDERS, URLSearchParams} from "angular2/http";
-import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
+"use strict";
 
-import {SearchboxComponent} from "./searchbox/searchbox.component";
-import {TranslationComponent} from "./translations/translation.component";
-import {TranslationsService} from "./translations/translations.service";
-import {HomeComponent} from "./home/home.component";
-import {SearchComponent} from "./search/search.component";
-import {VersesComponent} from "./verses/verses.component";
+// import Angular 2
+import {Component} from "angular2/core";
+
+// import Angular 2 Component Router
+// reference: http://blog.thoughtram.io/angular/2015/06/16/routing-in-angular-2.html
+import {RouteConfig, Route, RouterOutlet, RouterLink, Router} from "angular2/router";
+
+import {Http, HTTP_PROVIDERS, URLSearchParams} from "angular2/http";
+
+// app components
+import {Home} from "../pages/home/home";
+
+// app services
+import {SearchboxComponent} from "../searchbox/searchbox.component";
+import {TranslationComponent} from "../translations/translation.component";
+import {TranslationsService} from "../translations/translations.service";
+import {HomeComponent} from "../home/home.component";
+import {SearchComponent} from "../search/search.component";
+import {VersesComponent} from "../verses/verses.component";
 
 @Component({
-    selector: "bible",
-    templateUrl: "app/bible.html",
-    providers: [HTTP_PROVIDERS],
-    directives: [ROUTER_DIRECTIVES, SearchboxComponent, TranslationComponent],
+	selector: "app",
+	templateUrl: "core/app.template.html", //template: "<router-outlet></router-outlet>",
+	directives: [
+        RouterOutlet, RouterLink, SearchboxComponent, TranslationComponent
+    ]
 })
 @RouteConfig([
     {
@@ -30,9 +42,9 @@ import {VersesComponent} from "./verses/verses.component";
         component: SearchComponent,
     }
 ])
-export class BibleComponent {
+export class App {
 
-    results: any;
+	results: any;
 
     constructor(
         private http: Http,

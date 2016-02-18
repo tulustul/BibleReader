@@ -1,13 +1,13 @@
-import {Component} from 'angular2/core';
-import {Http, HTTP_PROVIDERS, URLSearchParams} from 'angular2/http';
-import {Router} from 'angular2/router';
+import {Component} from "angular2/core";
+import {Http, HTTP_PROVIDERS, URLSearchParams} from "angular2/http";
+import {Router} from "angular2/router";
 
 
-import {TranslationsService} from '../translations/translations.service';
+import {TranslationsService} from "../translations/translations.service";
 
 @Component({
-    selector: 'searchbox',
-    templateUrl: 'app/searchbox/searchbox.html',
+    selector: "searchbox",
+    templateUrl: "app/searchbox/searchbox.html",
     providers: [HTTP_PROVIDERS],
 })
 export class SearchboxComponent {
@@ -29,14 +29,14 @@ export class SearchboxComponent {
     }
 
     private goToVerse(verseQuery: string) {
-        this.router.navigate(['Verses', {
+        this.router.navigate(["Verses", {
             query: verseQuery,
             translations: this.translationsService.enabledTranslations,
         }]);
     }
 
     private query(searchQuery: string) {
-        this.router.navigate(['Search', {
+        this.router.navigate(["Search", {
             query: searchQuery,
             translations: this.translationsService.enabledTranslations,
         }]);

@@ -10,3 +10,4 @@ frontend/**/*.js.map
 *.sublime-project
 *.sublime-workspace
 
+trans-source
