@@ -8,10 +8,12 @@
   },
   "bugs": "https://github.com/tulustul/BibleReader/issues",
   "repository": "https://github.com/tulustul/BibleReader",
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://opensource.org/licenses/MIT"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ],
   "contributors": [],
   "homepage": "https://github.com/tulustul",
   "keywords": [
@@ -28,7 +30,8 @@
       "rxjs": "npm:rxjs@5.0.0-beta.2"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@6.5.0"
+      "babel": "npm:babel-core@6.5.0",
+      "core-js": "npm:core-js@^1.1.4"
     }
   },
   "dependencies": {

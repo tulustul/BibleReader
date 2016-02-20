@@ -2,9 +2,6 @@ __pycache__
 backend/settings/local.py
 
 trans
-frontend/node_modules
-frontend/**/*.js
-frontend/**/*.js.map
 *.log
 
 *.sublime-project
