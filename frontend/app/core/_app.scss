@@ -1,0 +1,19 @@
+app {
+    header {
+        display: flex;
+        flex-direction: horizontal;
+        ul.nav {
+            display: flex;
+            flex-direction: horizontal;
+            li {
+                padding: 0 10px;
+                &.active {
+                    border-bottom: 1px solid black;
+                }
+            }
+        }
+        > * {
+            padding: 10px;
+        }
+    }
+}

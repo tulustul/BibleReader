@@ -1,0 +1,19 @@
+.verses-translation {
+    border: 1px solid #aaa;
+    .header {
+        padding: 10px;
+        font-size: 18px;
+        border-bottom: 1px solid #aaa;
+    }
+    > ul {
+        padding: 10px;
+        &.merge-verses {
+            li {
+                display: inline;
+            }
+        }
+        .verse-number {
+            color: #aaa;
+        }
+    }
+}

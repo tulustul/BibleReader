@@ -1,0 +1,13 @@
+<div class="sidebar">
+    <ul>
+        <li *ngFor="#tab of tabs"
+            (click)="selectTab(tab)"
+            [ngClass]="{active: tab == activeTab}"
+        >
+            {{ tab.title }}
+        </li>
+    </ul>
+    <div class="content" [hidden]="!activeTab">
+        <ng-content></ng-content>
+    </div>
+</div>

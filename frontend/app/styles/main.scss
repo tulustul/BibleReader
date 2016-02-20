@@ -22,9 +22,17 @@
 @import "layout/_print";
 
 // Components
+@import "../modules/verses-translation/_verses-translation";
+@import "../modules/sidebar/_sidebar";
+@import "../modules/translations/_translations";
+@import "../core/_app";
 
 // Pages
 @import "../pages/home/_home";
+@import "../pages/about/_about";
+@import "../pages/reader/_reader";
+@import "../pages/verses/_verses";
+@import "../pages/search/_search";
 
 // Tests
 @import "tests/tests";

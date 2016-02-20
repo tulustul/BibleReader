@@ -1,0 +1,11 @@
+<div class="verses-translation">
+    <div class="header">
+        {{ translation.name }}
+    </div>
+    <ul [ngClass]="{'merge-verses': versesMerge}">
+        <li *ngFor="#verse of translation.verses">
+            <span class="verse-number">{{ verse.verse }}</span>
+            <span class="verse-text">{{ verse.text }}</span>
+        </li>
+    </ul>
+</div>

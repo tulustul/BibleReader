@@ -7,7 +7,7 @@ import {TranslationsService} from "../translations/translations.service";
 
 @Component({
     selector: "searchbox",
-    templateUrl: "app/searchbox/searchbox.html",
+    templateUrl: "app/modules/searchbox/searchbox.template.html",
     providers: [HTTP_PROVIDERS],
 })
 export class SearchboxComponent {
@@ -29,16 +29,16 @@ export class SearchboxComponent {
     }
 
     private goToVerse(verseQuery: string) {
-        this.router.navigate(["Verses", {
+        this.router.navigate(["Reader", "Verses", {
             query: verseQuery,
-            translations: this.translationsService.enabledTranslations,
+            translations: "" + this.translationsService.enabledTranslations,
         }]);
     }
 
     private query(searchQuery: string) {
-        this.router.navigate(["Search", {
+        this.router.navigate(["Reader", "Search", {
             query: searchQuery,
-            translations: this.translationsService.enabledTranslations,
+            translations: "" + this.translationsService.enabledTranslations,
         }]);
     }
 }

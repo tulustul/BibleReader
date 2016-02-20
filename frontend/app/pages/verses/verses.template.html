@@ -1,0 +1,19 @@
+<div class="verses" *ngIf="results">
+    {{ results.book }} {{ results.chapter }}
+    <button
+        class="merge-verses-button"
+        (click)="toggleVersesMerge()"
+        [ngClass]="{active: versesMerge}"
+    >
+        Merge verses
+    </button>
+    <ul>
+        <li *ngFor="#translation of results.translations">
+            <verses-translation
+                [translation]="translation"
+                [versesMerge]="versesMerge"
+            >
+            </verses-translation>
+        </li>
+    </ul>
+</div>

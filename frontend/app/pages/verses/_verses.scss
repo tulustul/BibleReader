@@ -1,0 +1,11 @@
+.verses {
+    .merge-verses-button {
+        &.active {
+            font-weight: bold;
+        }
+    }
+    > ul {
+        display: flex;
+        flex-direction: horizontal;
+    }
+}

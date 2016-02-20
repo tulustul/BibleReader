@@ -1,11 +1,12 @@
-Available translations:
 <ul>
     <li *ngFor="#language of translations">
-        <input type="checkbox">{{ language.name }}
+        <h3>{{ language.name }}</h3>
         <ul>
             <li *ngFor="#translation of language.translations">
                 <input type="checkbox"
-                       (click)="toggleTranslation(translation)">
+                       (click)="toggleTranslation(translation)"
+                       [checked]="isTranslationEnabled(translation)"
+                >
                 {{ translation.name }}
             </li>
         </ul>

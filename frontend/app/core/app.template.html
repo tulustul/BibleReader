@@ -1,4 +1,16 @@
-<a [routerLink]="['Home']">Home</a>
-<translations></translations>
-<searchbox></searchbox>
+<header>
+    <h1>Bible Reader</h1>
+
+    <ul class="nav">
+        <li
+            [class.active]="router.isRouteActive(router.generate(link.params))"
+            *ngFor="#link of links"
+        >
+            <a [routerLink]="link.params">{{ link.name }}</a>
+        </li>
+    </ul>
+
+    <searchbox></searchbox>
+</header>
+
 <router-outlet></router-outlet>
