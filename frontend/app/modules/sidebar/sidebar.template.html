@@ -4,10 +4,11 @@
             (click)="selectTab(tab)"
             [ngClass]="{active: tab == activeTab}"
         >
-            {{ tab.title }}
+            {{ tab.shortTitle }}
         </li>
     </ul>
     <div class="content" [hidden]="!activeTab">
+        <h3>{{ activeTab ? activeTab.title : '' }}</h3>
         <ng-content></ng-content>
     </div>
 </div>

@@ -4,7 +4,7 @@ import {SidebarComponent} from "./sidebar.component";
 @Component({
     selector: "tab",
     templateUrl: "app/modules/sidebar/tab.template.html",
-    inputs: ["title"],
+    inputs: ["title", "shortTitle"],
 })
 export class TabComponent {
 

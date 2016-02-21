@@ -1,13 +1,21 @@
 .sidebar {
     display: flex;
+    margin-right: 10px;
     > ul li {
+        background-color: #ddd;
         cursor: pointer;
+        padding: 5px 10px;
         &.active {
-            font-weight: bold;
+            background-color: #eee;
         }
     }
     > .content {
+        background-color: #eee;
         padding: 10px;
         min-width: 250px;
+        > h3 {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
     }
 }

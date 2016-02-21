@@ -1,4 +1,12 @@
 translations {
-    ul {
+    ul.languages {
+        > li:not(:last-child) {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+        .translation {
+            cursor: pointer;
+        }
     }
 }

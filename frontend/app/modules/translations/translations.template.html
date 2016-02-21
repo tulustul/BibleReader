@@ -1,14 +1,18 @@
-<ul>
-    <li *ngFor="#language of translations">
-        <h3>{{ language.name }}</h3>
-        <ul>
-            <li *ngFor="#translation of language.translations">
-                <input type="checkbox"
-                       (click)="toggleTranslation(translation)"
-                       [checked]="isTranslationEnabled(translation)"
-                >
-                {{ translation.name }}
-            </li>
-        </ul>
-    </li>
-</ul>
+<form action="">
+    <ul class="languages">
+        <li *ngFor="#language of translations">
+            <h3>{{ language.name }}</h3>
+            <ul class="translations">
+                <li *ngFor="#translation of language.translations">
+                    <label class="translation">
+                        <input type="checkbox"
+                               (click)="toggleTranslation(translation)"
+                               [checked]="isTranslationEnabled(translation)"
+                        >
+                        {{ translation.name }}
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>
