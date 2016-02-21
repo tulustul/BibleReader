@@ -1,6 +1,12 @@
 <div class="verses-translation">
     <div class="header">
-        {{ translation.name }}
+        <h2>{{ translation.name }}</h2>
+        <button *bibPopup>
+            <span>Change</span>
+            <popup-content>
+                <translations></translations>
+            </popup-content>
+        </button>
     </div>
     <ul [ngClass]="{'merge-verses': versesMerge}">
         <li *ngFor="#verse of translation.verses">

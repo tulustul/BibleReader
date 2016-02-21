@@ -2,8 +2,12 @@
     border: 1px solid #aaa;
     .header {
         padding: 10px;
-        font-size: 18px;
         border-bottom: 1px solid #aaa;
+        display: flex;
+        justify-content: space-between;
+        > h2 {
+            font-size: 18px;
+        }
     }
     > ul {
         padding: 10px;

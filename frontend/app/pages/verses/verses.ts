@@ -4,7 +4,6 @@ import {OnActivate, RouteParams} from "angular2/router";
 
 
 import {TranslationsService} from "../../modules/translations/translations.service";
-
 import {VersesTranslationComponent} from "../../modules/verses-translation/verses-translation.component";
 
 @Component({
