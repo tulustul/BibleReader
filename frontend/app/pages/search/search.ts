@@ -16,7 +16,7 @@ export class SearchComponent implements OnActivate {
 
     constructor(
         private http: Http,
-        private routeParams: RouteParams
+        private routeParams: RouteParams,
         private translationsService: TranslationsService
     ) {
         let params: URLSearchParams = new URLSearchParams();
@@ -34,6 +34,6 @@ export class SearchComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        this.enabledTranslations = this.translationsService.prepareEnabled(this.routeParams);
+        this.translationsService.prepareEnabled(this.routeParams);
     }
 }

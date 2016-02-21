@@ -1,12 +1,9 @@
 import {Inject, Injectable} from "angular2/core";
+import {RouteParams} from "angular2/router";
 
 @Injectable()
 export class TranslationsService {
     public enabledTranslations: number[] = [];
-
-    // constructor() {
-    //     this.enabledTranslations = [];
-    // }
 
     toggleTranslation(translationId: number) {
         let index = this.enabledTranslations.indexOf(translationId);
@@ -19,10 +16,14 @@ export class TranslationsService {
 
     prepareEnabled(routeParams: RouteParams) {
         this.enabledTranslations.splice(0, this.enabledTranslations.length);
-        let enabledTranslations = routeParams.get("translations");
-        if (enabledTranslations) {
-            enabledTranslations = enabledTranslations.split(",").map(id => parseInt(id, 10));
-            enabledTranslations.forEach(tran => this.enabledTranslations.push(tran));
+        let translations: string = routeParams.get("translations");
+        if (translations) {
+            let translationsArray: number[] = translations.split(",").map(
+                id => parseInt(id, 10)
+            );
+            translationsArray.forEach(
+                (tran: number) => this.enabledTranslations.push(tran)
+            );
         }
         return this.enabledTranslations;
     }

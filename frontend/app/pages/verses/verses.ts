@@ -21,8 +21,8 @@ export class VersesComponent implements OnActivate {
 
     constructor(
         private http: Http,
-        private routeParams: RouteParams
-        private translationsService: TranslationsService,
+        private routeParams: RouteParams,
+        private translationsService: TranslationsService
     ) {
         let params: URLSearchParams = new URLSearchParams();
         params.set("t", this.routeParams.get("translations"));
@@ -42,6 +42,6 @@ export class VersesComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        this.enabledTranslations = this.translationsService.prepareEnabled(this.routeParams);
+        this.translationsService.prepareEnabled(this.routeParams);
     }
 }

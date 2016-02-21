@@ -52,17 +52,17 @@ export class App {
     links = [
         {
             name: "Home",
-            params: ['Home'],
+            params: ["Home"],
         }, {
             name: "Read",
             params: [
-                'Reader',
-                'Verses',
-                {translations: '1', query: 'gen 1:1'},
+                "Reader",
+                "Verses",
+                {translations: "1", query: "gen 1:1"},
             ],
         }, {
             name: "About",
-            params: ['About'],
+            params: ["About"],
         },
     ];
 
