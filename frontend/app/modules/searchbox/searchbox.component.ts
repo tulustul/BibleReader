@@ -1,6 +1,6 @@
-import {Component} from "angular2/core";
+import {Component, } from "angular2/core";
 import {Http, HTTP_PROVIDERS, URLSearchParams} from "angular2/http";
-import {Router} from "angular2/router";
+import {Router, Location} from "angular2/router";
 
 
 import {TranslationsService} from "../translations/translations.service";
@@ -12,19 +12,23 @@ import {TranslationsService} from "../translations/translations.service";
 })
 export class SearchboxComponent {
 
-    results: any;
+    query: string;
 
     constructor(
         private router: Router,
+        private location: Location,
         private translationsService: TranslationsService
-    ) { }
+    ) {
+        let tokens: string[] = location.path().split('/');
+        this.query = tokens[tokens.length - 1].replace('%20', ' ');
+    }
 
-    search(searchTerm: string) {
-        let isVerseQuery = /(\w+){2,4} \d+(:\d+(-\d+)?)?/g.test(searchTerm);
+    search() {
+        let isVerseQuery = /(\w+){2,4} \d+(:\d+(-\d+)?)?/g.test(this.query);
         if (isVerseQuery) {
-            this.goToVerse(searchTerm);
+            this.goToVerse(this.query);
         } else {
-            this.query(searchTerm);
+            this.goToSearch(this.query);
         }
     }
 
@@ -35,7 +39,7 @@ export class SearchboxComponent {
         }]);
     }
 
-    private query(searchQuery: string) {
+    private goToSearch(searchQuery: string) {
         this.router.navigate(["Reader", "Search", {
             query: searchQuery,
             translations: "" + this.translationsService.enabledTranslations,

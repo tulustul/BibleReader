@@ -1,0 +1,11 @@
+ul.search-results {
+    li a {
+        &:hover {
+            text-decoration: underline;
+        }
+        .book {
+            color: #888;
+            font-style: italic;
+        }
+    }
+}

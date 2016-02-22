@@ -1,6 +1,6 @@
 import {Component} from "angular2/core";
 import {Http, URLSearchParams} from "angular2/http";
-import {OnActivate, RouteParams} from "angular2/router";
+import {OnActivate, RouteParams, RouterLink} from "angular2/router";
 
 import {TranslationComponent} from "../../modules/translations/translation.component";
 import {TranslationsService} from "../../modules/translations/translations.service";
@@ -8,7 +8,7 @@ import {TranslationsService} from "../../modules/translations/translations.servi
 @Component({
     selector: "page-search",
     templateUrl: "app/pages/search/search.template.html",
-    directives: [TranslationComponent],
+    directives: [RouterLink, TranslationComponent],
 })
 export class SearchComponent implements OnActivate {
 
@@ -30,6 +30,9 @@ export class SearchComponent implements OnActivate {
             }
         ).subscribe(response => {
             this.results = response.json();
+            this.results.forEach(verse => {
+                verse.address = `${verse.book} ${verse.chapter}:${verse.verse}`;
+            })
         });
     }
 

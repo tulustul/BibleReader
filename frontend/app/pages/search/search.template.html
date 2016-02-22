@@ -1,7 +1,15 @@
-<translations></translations>
-Search results:
-<ul>
+<ul class="search-results">
     <li *ngFor="#verse of results">
-        {{ verse.book }} {{ verse.chapter }}:{{ verse.verse }} - {{ verse.text }}
+        <a [routerLink]="[
+            'Verses', {
+                translations: routeParams.get('translations'),
+                query: verse.address
+            }
+        ]">
+            <span class="book">
+                {{ verse.address }}
+            </span>
+            <span class="text">{{ verse.text }}</span>
+        </a>
     </li>
 </ul>
