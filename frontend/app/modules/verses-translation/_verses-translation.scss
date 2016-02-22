@@ -12,6 +12,11 @@
             color: #888;
         }
     }
+    > .chapter {
+        text-align: center;
+        font-size: 25px;
+        color: #dadada;
+    }
     > ul {
         padding: 10px;
         &.merge-verses {
@@ -20,7 +25,7 @@
             }
         }
         li.highlighted {
-            background-color: #ddd;
+            background-color: #f5f5f5;
         }
         .verse-number {
             color: #aaa;

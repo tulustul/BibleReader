@@ -11,6 +11,7 @@
             </popup-content>
         </button>
     </div>
+    <h2 class="chapter">{{ chapter }}</h2>
     <ul [ngClass]="{'merge-verses': versesMerge}">
         <li *ngFor="#verse of translation.verses"
             [class.highlighted]="verse.verse == verseNumber"

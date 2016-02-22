@@ -9,7 +9,7 @@ import {PopupContentComponent} from "../../modules/popup/popupContent.component"
     selector: "verses-translation",
     templateUrl: "app/modules/verses-translation/verses-translation.template.html",
     directives: [TranslationComponent, PopupDirective, PopupContentComponent],
-    inputs: ["translation", "versesMerge"],
+    inputs: ["translation", "versesMerge", 'chapter'],
 })
 export class VersesTranslationComponent {
     translationsVisible: boolean = false;

@@ -11,6 +11,7 @@
         <li *ngFor="#translation of results.translations">
             <verses-translation
                 [translation]="translation"
+                [chapter]="results.chapter"
                 [versesMerge]="versesMerge"
             >
             </verses-translation>
