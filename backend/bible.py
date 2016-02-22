@@ -65,17 +65,24 @@ def verses(verse_string):
 
     translations = sql.DBSession.query(models.Translation).filter(
         models.Translation.id.in_(translation_ids)
+    ).join(models.Translation.books).filter(
+        models.TranslationBook.book == verses_metadata.book,
+    ).values(
+        'translation.id',
+        'translation.name',
+        'translation_book.book_name',
     )
 
     translations_json = []
     translations_map = {}
-    for translation in translations:
+    for tran_id, tran_name, book_name in translations:
         translations_json.append({
-            'id': translation.id,
-            'name': translation.name,
+            'id': tran_id,
+            'name': tran_name,
+            'book': book_name,
             'verses': [],
         })
-        translations_map[translation.id] = translations_json[-1]['verses']
+        translations_map[tran_id] = translations_json[-1]['verses']
 
     verses = sql.DBSession.query(models.Verse).filter(
         models.Verse.translation.in_(translation_ids),

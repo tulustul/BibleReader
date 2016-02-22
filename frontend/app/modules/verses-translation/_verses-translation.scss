@@ -5,8 +5,11 @@
         border-bottom: 1px solid #aaa;
         display: flex;
         justify-content: space-between;
-        > h2 {
+        h2 {
             font-size: 18px;
+        }
+        h3 {
+            color: #888;
         }
     }
     > ul {
