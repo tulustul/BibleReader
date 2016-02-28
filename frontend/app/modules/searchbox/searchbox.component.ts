@@ -5,6 +5,9 @@ import {Router, Location} from "angular2/router";
 
 import {TranslationsService} from "../translations/translations.service";
 
+var VERSE_PATTERN = /^(\w{2,4})( (\d+)(:(\d+)(-(\d+))?)?)?$/;
+
+
 @Component({
     selector: "searchbox",
     templateUrl: "app/modules/searchbox/searchbox.template.html",
@@ -24,7 +27,8 @@ export class SearchboxComponent {
     }
 
     search() {
-        let isVerseQuery = /(\w+){2,4} \d+(:\d+(-\d+)?)?/g.test(this.query);
+        this.query = this.query.trim();
+        let isVerseQuery = VERSE_PATTERN.test(this.query);
         if (isVerseQuery) {
             this.goToVerse(this.query);
         } else {

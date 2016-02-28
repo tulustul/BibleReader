@@ -1,4 +1,5 @@
 import collections
+import re
 
 import flask
 
@@ -14,19 +15,19 @@ VersesMetadata = collections.namedtuple('VersesMetadata', [
     'book', 'chapter', 'verse_from', 'verse_to'
 ])
 
+VERSE_PATTERN = re.compile(
+    r'(?P<book>\w{2,4})'
+    r'( (?P<chapter>\d+)(:(?P<verse_from>\d+)(-(?P<verse_to>\d+))?)?)?'
+)
+
 
 def parse_verse_string(verse_string):
-    book, verse = verse_string.split()
-    if ':' in verse:
-        chapter, verse = verse.split(':')
-    if '-' in verse:
-        verse_from, verse_to = verse.split('-')
-        verse = None
+    results = VERSE_PATTERN.match(verse_string)
     return VersesMetadata(
-        book=book,
-        chapter=chapter,
-        verse_from=verse or verse_from,
-        verse_to=verse or verse_to,
+        book=results.group('book'),
+        chapter=results.group('chapter') or 1,
+        verse_from=results.group('verse_from'),
+        verse_to=results.group('verse_to'),
     )
 
 
